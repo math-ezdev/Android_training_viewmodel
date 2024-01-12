@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_medium">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:name="ez_dev.training.mvvm_clicker.BasicClickerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/fragment_basic"
+            android:tag="@string/basic_clicker_fragment"
+            tools:layout="@layout/fragment_basic_clicker" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:name="ez_dev.training.mvvm_clicker.ArchitectureClickerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/fragment_architecture"
+            android:tag="@string/architecture_clicker_fragment"
+            tools:layout="@layout/fragment_architecture_clicker" />
+    </LinearLayout>
+
+</layout>

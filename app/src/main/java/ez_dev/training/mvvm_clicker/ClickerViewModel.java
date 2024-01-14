@@ -2,31 +2,32 @@ package ez_dev.training.mvvm_clicker;
 
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 
 public class ClickerViewModel extends ViewModel {
-    private final MutableLiveData<Integer> _count;
-    public final LiveData<Integer> count;
+    private static final String KEY_COUNT = "count";
+    private final SavedStateHandle savedStateHandle;
 
-    private ClickerViewModel() {
-        _count = new MutableLiveData<>(0);
-        count = _count;
+    public ClickerViewModel(SavedStateHandle savedStateHandle) {
+        this.savedStateHandle = savedStateHandle;
+        this.savedStateHandle.set(KEY_COUNT, 0);
     }
 
-    public void increase(){
-        if(_count.getValue() != null){
-            int currentValue = _count.getValue();
-            _count.setValue(++currentValue);
-        }
+    public LiveData<Integer> getCount() {
+        return savedStateHandle.getLiveData(KEY_COUNT);
     }
 
-    public void decrease(){
-        if(_count.getValue() != null){
-            int currentValue = _count.getValue();
-            if(currentValue > 0){
-                _count.setValue(--currentValue);
-            }
+    public void increase() {
+        int currentValue = savedStateHandle.get(KEY_COUNT);
+        savedStateHandle.set(KEY_COUNT, ++currentValue);
+
+    }
+
+    public void decrease() {
+        int currentValue = savedStateHandle.get(KEY_COUNT);
+        if (currentValue > 0) {
+            savedStateHandle.set(KEY_COUNT, ++currentValue);
         }
     }
 }
